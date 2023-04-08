@@ -108,35 +108,3 @@ fear = {
     "rugi": -1,
 }
 
-
-def emotion_analyst(text):
-    score = 0
-    for word in text:
-        if word in happy:
-            score += happy[word]
-        if word in sad:
-            score += sad[word]
-        if word in angry:
-            score += angry[word]
-        if word in fear:
-            score += fear[word]
-
-    if score >= 0:
-        return "happy"
-    elif -2 <= score < 0:
-        return "sad"
-    elif -5 <= score < -2:
-        return "angry"
-    else:
-        return "fearful"
-
-import pandas as pd
-
-dataset = pd.read_csv('dataset.csv')
-# dataset['text_preprocessed'] = dataset['text_preprocessed'].astype(str)
-
-results = data['text_preprocessed'].apply(sentiment_analysis_lexicon_indonesia)
-results = list(zip(*results))
-data['polarity_score'] = results[0]
-data['polarity'] = results[1]
-
